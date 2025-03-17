@@ -1,6 +1,235 @@
-
-.background-img{
+#root {
   width: 100%;
   height: 100%;
 }
+
+.background-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: fill; 
+}
+
+
+
+button {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+  color: white;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.8rem; 
+  font-weight: bold; 
+  font-style: italic; 
+  background-color: rgba(13, 13, 13, 0.653);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+button::first-letter {
+  text-transform: uppercase;
+}
+
+.canalave-city {
+  position: absolute;
+  top: 62%;
+  left: 13%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+.eterna-city {
+  position: absolute;
+  top: 39%;
+  left: 39.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+.pastoria-city {
+  position: absolute;
+  top: 77%;
+  left: 65.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.sunyshore-city {
+  position: absolute;
+  top: 66%;
+  left: 88%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.sinnoh-pokemon-league {
+  position: absolute;
+  top: 52%;
+  left: 86%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+.oreburgh-mine {
+  position: absolute;
+  top: 80.5%;
+  left: 39%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.valley-windworks {
+  position: absolute;
+  top: 57%;
+  left: 32%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.eterna-forest {
+  position: absolute;
+  top: 48%;
+  left: 31%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.fuego-ironworks {
+  position: absolute;
+  top: 51%;
+  left: 26.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.mt-coronet {
+  position: absolute;
+  top: 54%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+.great-marsh {
+  position: absolute;
+  top: 73%;
+  left: 57%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+
+.solaceon-ruins {
+  position: absolute;
+  top: 53%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+
+.sinnoh-victory-road {
+  position: absolute;
+  top: 57%;
+  left: 87%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.ravaged-path {
+  position: absolute;
+  top: 64%;
+  left: 26.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+.oreburgh-gate {
+  position: absolute;
+  top: 71%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+.stark-mountain {
+  position: absolute;
+  top: 14.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+.spring-path {
+  position: absolute;
+  top: 66%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+.turnback-cave {
+  position: absolute;
+  top: 60%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+
+.snowpoint-temple {
+  position: absolute;
+  top: 19.5%;
+  left: 45.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+.wayward-cave {
+  position: absolute;
+  top: 64%;
+  left: 36%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+
+
+
 
