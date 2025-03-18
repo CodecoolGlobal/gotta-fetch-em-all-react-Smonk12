@@ -7,6 +7,8 @@ function App() {
   const [locations, setLocations] = useState([]);
   const [zoomedLocation, setZoomedLocation] = useState("");
   const [areas, setAreas] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
+  const [randomPokemon, setRandomPokemon] = useState("");
 
 
   useEffect(() => {
@@ -22,6 +24,30 @@ function App() {
 
     fetchLocations();
   }, []);
+
+  async function areaClick(area) {
+
+    try {
+      const response = await fetch(area.url);
+      const data = await response.json();
+      setPokemons(data.pokemon_encounters);
+      console.log(data.pokemon_encounters);
+
+      if (data.pokemon_encounters.length > 0) {
+        const randomIndex = Math.floor(Math.random() * data.pokemon_encounters.length);
+        const caughtPokemon = data.pokemon_encounters[randomIndex].pokemon.name;
+        setRandomPokemon(caughtPokemon);
+        console.log(caughtPokemon);
+        
+      } else {
+        setRandomPokemon("This location doesn't seem to have any pokémon!");
+      }
+      
+
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+    }
+  };
 
 
   async function checkClick(locationName, location) {
@@ -59,10 +85,11 @@ function App() {
       {zoomedLocation && areas.length > 0 && (
         <div>
           <ul>
-            {areas.map((area, index) => (
+            {areas.map((area) => (
               <AreaButtons
-                key={index}
-                areaProp={area.name} />
+                key={area.name}
+                areaProp={area}
+                areaClick={areaClick} />
             ))}
           </ul>
         </div>
