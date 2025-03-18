@@ -1,11 +1,11 @@
 import React from "react";
 
 
-function AreaButtons({areaProp}) {
+function AreaButtons({areaProp, areaClick}) {
     return (
       <div className={areaProp}>
-        <button className={areaProp}>
-          {areaProp}
+        <button className={areaProp.name} onClick={()=>areaClick(areaProp)}>
+          {areaProp.name}
         </button>
       </div>
     );
