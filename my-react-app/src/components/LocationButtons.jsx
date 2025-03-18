@@ -1,14 +1,13 @@
 import React from "react";
 
-function LocationButtons({locationProp}) {
-return(
+function LocationButtons({ locationProp, checkClick }) {
+  return (
     <div className={locationProp.name}>
-        <button className={locationProp.name}>{locationProp.name}</button>
+      <button onClick={() => checkClick(locationProp.name, locationProp)} className={locationProp.name}>
+        {locationProp.name}
+      </button>
     </div>
-)
+  );
 }
-
-
-
 
 export default LocationButtons;
