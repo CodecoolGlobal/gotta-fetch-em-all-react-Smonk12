@@ -1,7 +1,11 @@
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
 import LocationButtons from './components/LocationButtons';
 import AreaButtons from './components/AreaButtons';
+import SelectPokemon from './pages/SelectPokemon';
+import Fight from './pages/Fight';
+
 
 function App() {
   const [locations, setLocations] = useState([]);
@@ -9,6 +13,7 @@ function App() {
   const [areas, setAreas] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [randomPokemon, setRandomPokemon] = useState("");
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -38,11 +43,15 @@ function App() {
         const caughtPokemon = data.pokemon_encounters[randomIndex].pokemon.name;
         setRandomPokemon(caughtPokemon);
         console.log(caughtPokemon);
-        
+
+
+        navigate('/select-pokemon', { state: { randomPokemon: caughtPokemon } });
+
+
       } else {
         setRandomPokemon("This location doesn't seem to have any pokémon!");
       }
-      
+
 
     } catch (error) {
       console.error('Error fetching locations:', error);
@@ -71,30 +80,46 @@ function App() {
   }
 
   return (
-    <>
-      {locations
-        .filter(location => zoomedLocation === "" || zoomedLocation === location.name)
-        .map(location => (
-          <LocationButtons
-            key={location.name}
-            locationProp={location}
-            checkClick={checkClick}
-          />
-        ))}
-
-      {zoomedLocation && areas.length > 0 && (
-        <div>
-          <ul>
-            {areas.map((area) => (
-              <AreaButtons
-                key={area.name}
-                areaProp={area}
-                areaClick={areaClick} />
-            ))}
-          </ul>
-        </div>
+    <div>
+      {location.pathname === '/' && (
+        <img src="./src/assets/k5ocr0kntvm21.jpg" className="background-img" alt="Background Image" />
       )}
-    </>
+      <Routes>
+        {/* Home Page: Select Area */}
+        <Route path="/" element={
+          <>
+            {locations
+              .filter(location => zoomedLocation === "" || zoomedLocation === location.name)
+              .map(location => (
+                <LocationButtons
+                  key={location.name}
+                  locationProp={location}
+                  checkClick={checkClick}
+                />
+              ))}
+
+            {zoomedLocation && areas.length > 0 && (
+              <div>
+                <ul className="area-buttons">
+                  {areas.map((area) => (
+                    <AreaButtons
+                      key={area.name}
+                      areaProp={area}
+                      areaClick={areaClick} />
+                  ))}
+                </ul>
+              </div>
+            )}
+          </>
+        } />
+
+        {/* Pokémon Selection Page */}
+        <Route path="/select-pokemon" element={<SelectPokemon />} />
+
+        {/* Fight Page */}
+        <Route path="/fight" element={<Fight />} />
+      </Routes>
+    </div>
   );
 }
 

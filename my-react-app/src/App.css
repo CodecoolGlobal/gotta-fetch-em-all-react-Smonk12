@@ -1,27 +1,44 @@
-#root {
-  width: 100%;
-  height: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+#root {
+  width: 100vw; 
+  height: 100vh; 
+  overflow: hidden;
+}
+
+
 
 .background-img {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh; 
   z-index: -1;
-  object-fit: fill; 
+  object-fit: fill;
 }
 
 
+ul.area-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
 
 button {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
   color: white;
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.95rem; 
+  padding: calc(0.6rem + 0.1dvw) calc(0.6rem + 0.1dvw);
+  font-size: calc(0.8rem + 0.1dvw); 
   background-color: #0d0d0d;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -40,7 +57,7 @@ button::first-letter {
   text-transform: uppercase;
 }
 
-.canalave-city {
+ .canalave-city {
   position: absolute;
   top: 71%;
   left: 12.7%;
@@ -835,10 +852,6 @@ button::first-letter {
   transform: translate(-50%, -50%);
   width:max-content;
 }
-
-
-
-
 
 
 
