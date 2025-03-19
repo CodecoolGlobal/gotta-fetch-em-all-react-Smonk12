@@ -43,15 +43,19 @@ function Fight() {
   };
 
 
-  return (
+    return (
     <div className="fight-background">
       <h1>Battle Begins!</h1>
       <div>
+        <div className='your-pokemon-div'>
+      {selectedPokemon.sprites && (
+          <img className='your-pokemon-img' src={selectedPokemon.sprites.back_default} alt={selectedPokemon.name} />
+        )}
+        </div>
+
+<div className='your-pokemon-stats'>
         <h2>Your Pokémon</h2>
         <p>Name: {selectedPokemon.name}</p>
-        {selectedPokemon.sprites && (
-          <img src={selectedPokemon.sprites.back_default} alt={selectedPokemon.name} />
-        )}
         {selectedPokemon.stats && (
           <>
             <p>HP: {playerHP}</p>
@@ -59,20 +63,26 @@ function Fight() {
             <p>Defense: {selectedPokemon.stats[2].base_stat}</p>
           </>
         )}
+        </div>
       </div>
       <div>
+      <div className='enemy-pokemon-div'>
+        {enemyPokemon.sprites && (
+          <img className='enemy-pokemon-img' src={enemyPokemon.sprites.front_default} alt={enemyPokemon.name} />
+        )}
+</div>
+<div className='enemy-pokemon-stats'>
         <h2>Enemy Pokémon</h2>
         <p>Name: {enemyPokemon.name}</p>
-        {enemyPokemon.sprites && (
-          <img src={enemyPokemon.sprites.front_default} alt={enemyPokemon.name} />
-        )}
         {enemyPokemon.stats && (
           <>
-            <p>HP: {enemyHP}</p>
+          <p>HP: {enemyHP}</p>
             <p>Attack: {enemyPokemon.stats[1].base_stat}</p>
             <p>Defense: {enemyPokemon.stats[2].base_stat}</p>
+
           </>
         )}
+        </div>
       </div>
       <button onClick={handleAttack}>Attack</button>
       <button>Run</button>
