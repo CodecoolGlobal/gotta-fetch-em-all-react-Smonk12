@@ -10,6 +10,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 
@@ -22,4 +23,98 @@ html, body {
   background-repeat: no-repeat;
   width: 100vw; 
   height: 100vh; 
+  overflow: hidden;
 }
+
+
+.fight-background h1 {
+  display:flex;
+  flex-direction: column;
+align-items: center;
+background: linear-gradient(
+      hsl(0, 0%, 20%), 
+      hsl(0, 0%, 60%),
+      hsl(0, 0%, 20%)
+      );
+padding: 0.4rem;
+border: solid 1px hsl(0, 0%, 0%);
+}
+
+
+
+
+.your-pokemon-stats{
+  position: absolute;
+  display:flex;
+  align-items: center;
+  font-size: 3rem;
+  right: 0%;
+  top: 60%;
+  color:hsl(174, 99%, 54%);
+  width:50%;
+  padding: 1rem;
+  border: solid 0.2rem hsl(0, 0%, 0%);
+  border-right: none;
+  background: linear-gradient(
+      hwb(0 19% 80%), 
+      #000000ba,
+      hwb(0 19% 80%)
+      );
+}
+
+
+.enemy-pokemon-stats{
+  position: absolute;
+  display:flex;
+  align-items: center;
+  color:hwb(0 0% 0%);
+  font-size: 3rem;
+  left: 0%;
+  top: 8%;
+  width:50%;
+  padding: 1rem;
+  border: solid 0.2rem hsl(0, 0%, 0%);
+  border-left: none;
+  background: linear-gradient(
+    hwb(0 19% 80%), 
+    #000000ba,
+      hwb(0 19% 80%)
+      );
+}
+
+
+
+
+
+.your-pokemon-div{
+  position:absolute;
+  left: 12%;
+  top: 35%;
+}
+
+.your-pokemon-img{
+  image-rendering: pixelated;
+  width: calc(25vw + 25vh); 
+  height: auto; 
+}
+
+
+
+.enemy-pokemon-div {
+  position: absolute;
+  right: 24%;
+  top: 20%;
+}
+
+
+
+.enemy-pokemon-img {
+  image-rendering: pixelated;
+  width: calc(15vw + 15vh);
+  height: auto; 
+}
+
+
+
+
+
