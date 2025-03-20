@@ -75,7 +75,7 @@ function Fight() {
           return newHP;
         });
       } setIsAttackDisabled(false);
-    }, 0);
+    }, 1000);
   };
 
   useEffect(() => {
