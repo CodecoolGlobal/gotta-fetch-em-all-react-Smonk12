@@ -8,7 +8,7 @@ function SelectPokemonApp() {
   const navigate = useNavigate();
   const location = useLocation();
   const { randomPokemon } = location.state || {}; // Get selected Pokémon from previous page
-  const [randomPokemonStats, setRandomStats] = useState([]);
+  const [randomPokemonStats, setRandomPokemonStats] = useState([]);
 
 
 
@@ -17,7 +17,7 @@ function SelectPokemonApp() {
       try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemon}`);
         const data = await response.json();
-        setRandomStats(data)
+        setRandomPokemonStats(data)
       } catch (error) {
         console.error('Error fetching locations:', error);
       }

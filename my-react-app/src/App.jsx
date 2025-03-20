@@ -14,6 +14,7 @@ function App() {
   const [pokemons, setPokemons] = useState([]);
   const [randomPokemon, setRandomPokemon] = useState("");
   const navigate = useNavigate();
+  const [userPokemons, setUserPokemons] = useState([]);
 
 
   useEffect(() => {
@@ -114,11 +115,12 @@ function App() {
         } />
 
         {/* Pokémon Selection Page */}
-        <Route path="/select-pokemon" element={<SelectPokemon />} />
+        <Route path="/select-pokemon" element={<SelectPokemon userPokemons={userPokemons} setUserPokemons={setUserPokemons} />} />
 
         {/* Fight Page */}
-        <Route path="/fight" element={<Fight />} />
+        <Route path="/fight" element={<Fight userPokemons={userPokemons} setUserPokemons={setUserPokemons} />} />
       </Routes>
+      
     </div>
   );
 }
