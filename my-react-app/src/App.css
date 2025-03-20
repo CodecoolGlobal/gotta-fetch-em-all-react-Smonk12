@@ -726,6 +726,48 @@ button::first-letter {
   transform: translate(-50%, -50%);
   width:max-content;
 }
+.sinnoh-victory-road-inside {
+  position: absolute;
+  top: 61.5%;
+  left: 87%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-inside-exit {
+  position: absolute;
+  top: 66%;
+  left: 87%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-1f {
+  position: absolute;
+  top: 47%;
+  left: 78%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-2f {
+  position: absolute;
+  top: 47%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-b1f {
+  position: absolute;
+  top: 52%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-inside-b1f {
+  position: absolute;
+  top: 52%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
 
 
 
@@ -745,6 +787,13 @@ button::first-letter {
   transform: translate(-50%, -50%);
   width:max-content;
 }
+.ravaged-path-area {
+  position: absolute;
+  top: 59%;
+  left: 27.8%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
 
 .oreburgh-gate {
   position: absolute;
@@ -753,7 +802,20 @@ button::first-letter {
   transform: translate(-50%, -50%);
   width:max-content;
 }
-
+.oreburgh-gate-1f {
+  position: absolute;
+  top: 66%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.oreburgh-gate-b1f {
+  position: absolute;
+  top: 76%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
 
 
 .stark-mountain {
@@ -763,6 +825,36 @@ button::first-letter {
   transform: translate(-50%, -50%);
   width:max-content;
 }
+
+.stark-mountain-area {
+  position: absolute;
+  top: 9.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.stark-mountain-entrance {
+  position: absolute;
+  top: 24.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.stark-mountain-inside {
+  position: absolute;
+  top: 19.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.stark-mountain-heatran-chamber {
+  position: absolute;
+  top: 29.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
 
 
 
@@ -783,6 +875,56 @@ button::first-letter {
   transform: translate(-50%, -50%);
   width:max-content;
 }
+.turnback-cave-before-pillar-1 {
+  position: absolute;
+  top: 37.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-pillar-1 {
+  position: absolute;
+  top: 42%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-between-pillars-1-and-2 {
+  position: absolute;
+  top: 46.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-pillar-2 {
+  position: absolute;
+  top: 51%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-between-pillars-2-and-3 {
+  position: absolute;
+  top: 55.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-pillar-3 {
+  position: absolute;
+  top: 64.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-after-pillar-3 {
+  position: absolute;
+  top: 69.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
 
 
 
@@ -849,6 +991,20 @@ button::first-letter {
   position: absolute;
   top: 64%;
   left: 36%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.wayward-cave-1f {
+  position: absolute;
+  top: 59%;
+  left: 36.6%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.wayward-cave-b1f {
+  position: absolute;
+  top: 69%;
+  left: 36.9%;
   transform: translate(-50%, -50%);
   width:max-content;
 }
