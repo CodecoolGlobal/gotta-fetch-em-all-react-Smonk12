@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import UserPokemon from '../components/UserPokemon';
+import './SelectPokemon.css';
 
 function SelectPokemonApp() {
   const [userPokemons, setUserPokemons] = useState([]);
@@ -11,7 +12,7 @@ function SelectPokemonApp() {
   const [randomPokemonStats, setRandomPokemonStats] = useState([]);
   const { usersPokemonUrls } = location.state || {};
 
-  
+
   useEffect(() => {
     const fetchPokemonStats = async () => {
       try {
@@ -45,23 +46,27 @@ function SelectPokemonApp() {
 
   function handleSelectPokemon(pokemon) {
     setSelectedPokemon(pokemon);
-    navigate('/fight', { state: { selectedPokemon: pokemon, enemyPokemon: randomPokemonStats } });
+    navigate('/fight', { state: { selectedPokemon: pokemon, enemyPokemon: randomPokemonStats, usersPokemonUrls, userPokemons,randomPokemon} });
   }
-
+console.log(randomPokemonStats)
   return (
-    <>
-      <div>
-        <h2>Your pokemons:</h2>
-        {userPokemons.map(userpokemon => (
-          <UserPokemon
-            key={userpokemon.name}
-            pokemon={userpokemon}
-            onClick={() => handleSelectPokemon(userpokemon)}
-          />
-        ))}
-        <p>Enemy Pokémon: {randomPokemon}</p>
+    <div className='select-container'>
+      <button className="back-btn" onClick={()=> navigate('/')}>Back to locations...</button>
+      <h2>Select your Pokemon:</h2>
+      <div className="poke-list">
+      {userPokemons.map(userpokemon => (
+        <UserPokemon
+          key={userpokemon.name}
+          pokemon={userpokemon}
+          onClick={() => handleSelectPokemon(userpokemon)}
+        />
+      ))}
       </div>
-    </>
+      <div className='enemy-pokemon'>
+        <h2>Enemy Pokémon:</h2>
+        <p>{randomPokemon}</p>
+      </div>
+    </div>
   );
 }
 

@@ -7,7 +7,7 @@ function Fight() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { selectedPokemon, enemyPokemon } = location.state || {};
+  const { selectedPokemon, enemyPokemon, usersPokemonUrls, userPokemons, randomPokemon } = location.state || {};
 
   if (!selectedPokemon || !enemyPokemon) {
     return <div>Loading...</div>;
@@ -136,8 +136,8 @@ function Fight() {
         </div>
       </div>
       <button onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
-      <button>Select different Pokémon</button>
-      <button>Run</button>
+      <button onClick={()=> navigate('/select-pokemon', { state: {usersPokemonUrls, userPokemons, randomPokemon}})}>Select different Pokémon</button>
+      <button onClick={()=> navigate('/')}>Run</button>
     </div>
   );
 }
