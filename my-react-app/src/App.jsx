@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
 import LocationButtons from './components/LocationButtons';
@@ -11,10 +11,23 @@ function App() {
   const [locations, setLocations] = useState([]);
   const [zoomedLocation, setZoomedLocation] = useState("");
   const [areas, setAreas] = useState([]);
-  const [pokemons, setPokemons] = useState([]);
+  const [areaPokemons, setAreaPokemons] = useState([]);
   const [randomPokemon, setRandomPokemon] = useState("");
   const navigate = useNavigate();
-  const [userPokemons, setUserPokemons] = useState([]);
+  const location = useLocation();
+  const { newPokemon } = location.state || {};
+  const [startingPokemons, setStartingPokemons] = useState([
+    "https://pokeapi.co/api/v2/pokemon/bulbasaur",
+    "https://pokeapi.co/api/v2/pokemon/charizard",
+    "https://pokeapi.co/api/v2/pokemon/poliwhirl"
+  ]);
+
+  if (newPokemon !== "You lost!" && newPokemon) {
+    const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${newPokemon}`;
+    if (!startingPokemons.includes(pokemonUrl)) {
+      setStartingPokemons(startingPokemons => [...startingPokemons, pokemonUrl]);
+    }
+  }
 
 
   useEffect(() => {
@@ -36,7 +49,7 @@ function App() {
     try {
       const response = await fetch(area.url);
       const data = await response.json();
-      setPokemons(data.pokemon_encounters);
+      setAreaPokemons(data.pokemon_encounters);
       console.log(data.pokemon_encounters);
 
       if (data.pokemon_encounters.length > 0) {
@@ -46,7 +59,7 @@ function App() {
         console.log(caughtPokemon);
 
 
-        navigate('/select-pokemon', { state: { randomPokemon: caughtPokemon } });
+        navigate('/select-pokemon', { state: { randomPokemon: caughtPokemon, usersPokemonUrls: startingPokemons } });
 
 
       } else {
@@ -115,12 +128,12 @@ function App() {
         } />
 
         {/* Pokémon Selection Page */}
-        <Route path="/select-pokemon" element={<SelectPokemon userPokemons={userPokemons} setUserPokemons={setUserPokemons} />} />
+        <Route path="/select-pokemon" element={<SelectPokemon/>} />
 
         {/* Fight Page */}
-        <Route path="/fight" element={<Fight userPokemons={userPokemons} setUserPokemons={setUserPokemons} />} />
+        <Route path="/fight" element={<Fight/>} />
       </Routes>
-      
+
     </div>
   );
 }

@@ -9,9 +9,9 @@ function SelectPokemonApp() {
   const location = useLocation();
   const { randomPokemon } = location.state || {}; // Get selected Pokémon from previous page
   const [randomPokemonStats, setRandomPokemonStats] = useState([]);
+  const { usersPokemonUrls } = location.state || {};
 
-
-
+  
   useEffect(() => {
     const fetchPokemonStats = async () => {
       try {
@@ -22,17 +22,11 @@ function SelectPokemonApp() {
         console.error('Error fetching locations:', error);
       }
     };
+    if (randomPokemon) {
+      fetchPokemonStats();
+    }
+  }, [randomPokemon]);
 
-    fetchPokemonStats();
-  }, []);
-
-
-
-  const usersPokemonUrls = [
-    "https://pokeapi.co/api/v2/pokemon/bulbasaur",
-    "https://pokeapi.co/api/v2/pokemon/charizard",
-    "https://pokeapi.co/api/v2/pokemon/poliwhirl"
-  ];
 
   useEffect(() => {
     const fetchPokemon = async () => {

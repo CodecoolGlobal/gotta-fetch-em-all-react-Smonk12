@@ -16,6 +16,8 @@ function Fight() {
   const [playerHP, setPlayerHP] = useState(0);
   const [enemyHP, setEnemyHP] = useState(0);
   const [battleOver, setBattleOver] = useState(false);
+  const [catchedPokemon, setCatchedPokemon] = useState("");
+  const [isAttackDisabled, setIsAttackDisabled] = useState(false);
 
 
   useEffect(() => {
@@ -39,17 +41,23 @@ function Fight() {
 
 
   const handleAttack = () => {
+    setIsAttackDisabled(true);
     //if (battleOver) return; // Don't allow attacking if the battle is over.
 
-    if (battleOver) {
+    if (battleOver === true) {
       return;
     };
 
     const damageToEnemy = calculateDamage(selectedPokemon, enemyPokemon);
+
     setEnemyHP(prevHP => {
       const newHP = Math.max(prevHP - damageToEnemy, 0);
       if (newHP === 0) {
         setBattleOver(true);
+        setCatchedPokemon(enemyPokemon.name);
+        console.log(enemyPokemon);
+
+        console.log("won");
       }
       return newHP;
     });
@@ -61,19 +69,29 @@ function Fight() {
           const newHP = Math.max(prevHP - damageToPlayer, 0);
           if (newHP === 0) {
             setBattleOver(true);
+            setCatchedPokemon("You lost!");
+            console.log("enemy won");
           }
           return newHP;
         });
-      }
-    }, 1000);
+      } setIsAttackDisabled(false);
+    }, 0);
   };
 
+  useEffect(() => {
+    if (catchedPokemon === "You lost!" && battleOver === true) {
+      setTimeout(() => navigate('/'), 999);
+    }
+  }, []);
 
   useEffect(() => {
-    if (battleOver === true) {
-      setTimeout(() => navigate('/'), 2000);
+    if (catchedPokemon) {
+      console.log("Catched Pokémon:", catchedPokemon);
+      if (battleOver === true) {
+        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 999);
+      }
     }
-  }, [battleOver, navigate]);
+  }, [catchedPokemon]);
 
 
   return (
@@ -117,7 +135,8 @@ function Fight() {
           )}
         </div>
       </div>
-      <button onClick={handleAttack}>Attack</button>
+      <button onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
+      <button>Select different Pokémon</button>
       <button>Run</button>
     </div>
   );
