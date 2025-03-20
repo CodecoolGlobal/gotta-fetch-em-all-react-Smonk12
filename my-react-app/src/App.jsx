@@ -105,10 +105,12 @@ function App() {
             {locations
               .filter(location => zoomedLocation === "" || zoomedLocation === location.name)
               .map(location => (
+               
                 <LocationButtons
-                  key={location.name}
+                 key={location.name}
                   locationProp={location}
                   checkClick={checkClick}
+
                 />
               ))}
 

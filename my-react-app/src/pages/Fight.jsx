@@ -7,17 +7,27 @@ function Fight() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { selectedPokemon, enemyPokemon } = location.state || {};
+  const { selectedPokemon, enemyPokemon, usersPokemonUrls, userPokemons } = location.state || {};
+
 
   if (!selectedPokemon || !enemyPokemon) {
     return <div>Loading...</div>;
   }
+
+
+  let enemyPokemonGIF = enemyPokemon.sprites.versions["generation-v"]["black-white"].animated.front_default
+  let selectedPokemonGIF = selectedPokemon.sprites.versions["generation-v"]["black-white"].animated.back_default
+
+
 
   const [playerHP, setPlayerHP] = useState(0);
   const [enemyHP, setEnemyHP] = useState(0);
   const [battleOver, setBattleOver] = useState(false);
   const [catchedPokemon, setCatchedPokemon] = useState("");
   const [isAttackDisabled, setIsAttackDisabled] = useState(false);
+
+
+
 
 
   useEffect(() => {
@@ -71,16 +81,19 @@ function Fight() {
             setBattleOver(true);
             setCatchedPokemon("You lost!");
             console.log("enemy won");
+            setIsAttackDisabled(true)
           }
           return newHP;
         });
       } setIsAttackDisabled(false);
-    }, 1000);
+    }, 0);
   };
 
   useEffect(() => {
     if (catchedPokemon === "You lost!" && battleOver === true) {
+      setIsAttackDisabled(true)
       setTimeout(() => navigate('/'), 999);
+      setIsAttackDisabled(false)
     }
   }, []);
 
@@ -94,50 +107,59 @@ function Fight() {
   }, [catchedPokemon]);
 
 
+
+
   return (
     <div className="fight-background">
-      <h1>Battle Begins!</h1>
+      <h1 className='top-text'>The Battle Begins!</h1>
       <div>
-        <div className='your-pokemon-div'>
+        <div className='your-pokemon-img-div'>
           {selectedPokemon.sprites && (
-            <img className='your-pokemon-img' src={selectedPokemon.sprites.back_default} alt={selectedPokemon.name} />
+            <img className='your-pokemon-img' src={selectedPokemonGIF} alt={selectedPokemon.name} />
           )}
         </div>
 
-        <div className='your-pokemon-stats'>
-          <h2>Your Pokémon</h2>
-          <p>Name: {selectedPokemon.name}</p>
+        <div className='your-pokemon-stats-div'>
+          <div>
+            <h1 className='pokemon-name'>{selectedPokemon.name}</h1>
+          </div>
           {selectedPokemon.stats && (
             <>
-              <p>HP: {playerHP}</p>
-              <p>Attack: {selectedPokemon.stats[1].base_stat}</p>
-              <p>Defense: {selectedPokemon.stats[2].base_stat}</p>
+              <div>
+                <p><img className='heart' src="./src/assets/friendly-heart.png" alt="heart-icon" />HP: {playerHP}</p>
+                <p><img className='attack' src="./src/assets/attack.png" alt="heart-icon" />Attack: {selectedPokemon.stats[1].base_stat}</p>
+                <p><img className='defense' src="./src/assets/defense.png" alt="defense-icon" />Defense: {selectedPokemon.stats[2].base_stat}</p>
+              </div>
             </>
           )}
         </div>
       </div>
       <div>
-        <div className='enemy-pokemon-div'>
+        <div className='enemy-pokemon-img-div'>
           {enemyPokemon.sprites && (
-            <img className='enemy-pokemon-img' src={enemyPokemon.sprites.front_default} alt={enemyPokemon.name} />
+            <img className='enemy-pokemon-img' src={enemyPokemonGIF} alt={enemyPokemon.name} />
           )}
         </div>
-        <div className='enemy-pokemon-stats'>
-          <h2>Enemy Pokémon</h2>
-          <p>Name: {enemyPokemon.name}</p>
+        <div className='enemy-pokemon-stats-div'>
+          <div>
+            <h1 className='pokemon-name'>{enemyPokemon.name}</h1>
+          </div>
           {enemyPokemon.stats && (
             <>
-              <p>HP: {enemyHP}</p>
-              <p>Attack: {enemyPokemon.stats[1].base_stat}</p>
-              <p>Defense: {enemyPokemon.stats[2].base_stat}</p>
-
+              <div>
+                <p><img className='heart' src="./src/assets/enemy-heart.png" alt="heart-icon" />HP: {enemyHP}</p>
+                <p><img className='attack' src="./src/assets/attack.png" alt="heart-icon" />Attack: {enemyPokemon.stats[1].base_stat}</p>
+                <p><img className='defense' src="./src/assets/defense.png" alt="defense-icon" />Defense: {enemyPokemon.stats[2].base_stat}</p>
+              </div>
             </>
           )}
         </div>
       </div>
-      <button onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
-      <button>Select different Pokémon</button>
-      <button>Run</button>
+      <div className='fight-btns'>
+      <button className='attack-btn btn' onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
+      <button className='select-diff-btn btn'>Select different Pokémon</button>
+      <button className='run-btn btn'>Run</button>
+      </div>
     </div>
   );
 }

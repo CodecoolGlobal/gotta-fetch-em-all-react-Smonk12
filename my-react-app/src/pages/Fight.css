@@ -24,97 +24,173 @@ html, body {
   width: 100vw; 
   height: 100vh; 
   overflow: hidden;
-}
+;}
 
 
-.fight-background h1 {
+.top-text {
   display:flex;
+  color:#ffffff;
   flex-direction: column;
 align-items: center;
+font-size: calc(1rem + 1dvw + 1dvh);;
 background: linear-gradient(
-      hsl(0, 0%, 20%), 
-      hsl(0, 0%, 60%),
-      hsl(0, 0%, 20%)
+      rgb(110, 80, 0), 
+      hwb(0 0% 100%),
+      rgb(110, 80, 0)
       );
-padding: 0.4rem;
-border: solid 1px hsl(0, 0%, 0%);
+padding: 1rem;
+border: none;
+font-family: 'Press Start 2P';
+border-bottom: solid 1px #985b00;;
 }
 
 
 
 
-.your-pokemon-stats{
+p{
+  display:flex;
+  font-family: 'Press Start 2P';
+  flex-direction: row-reverse;
+  font-size: calc(1rem + 0.4dvw + 0.4dvh);;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+
+}
+
+
+
+.pokemon-name::first-letter{
+  text-transform: uppercase;
+}
+
+.your-pokemon-stats-div{
   position: absolute;
   display:flex;
-  align-items: center;
+  align-items: flex-start;
+  align-content: flex-start;
+
+  flex-direction: column;
   font-size: 3rem;
   right: 0%;
-  top: 60%;
+  top: 70%;
   color:hsl(174, 99%, 54%);
-  width:50%;
+  width: 45%;
   padding: 1rem;
-  border: solid 0.2rem hsl(0, 0%, 0%);
+  border: solid 0.2rem hwb(184 0% 0%);
   border-right: none;
   background: linear-gradient(
-      hwb(0 19% 80%), 
-      #000000ba,
-      hwb(0 19% 80%)
+      #006471, 
+      hwb(0 0% 100% / 0.729),
+      #006471
       );
 }
 
+.heart{
+  margin: 0px;
+  height: 3rem;
+  width: auto
+}
 
-.enemy-pokemon-stats{
+.attack{
+  margin: 0px;
+  filter: invert(100%);
+  height: 3rem;
+  width: auto
+}
+
+.defense{
+  height: 3rem;
+  width: auto}
+
+.enemy-pokemon-stats-div{
   position: absolute;
   display:flex;
   align-items: center;
+  flex-direction: column;
   color:hwb(0 0% 0%);
   font-size: 3rem;
   left: 0%;
-  top: 8%;
-  width:50%;
+  top: 10%;
+  width:30%;
   padding: 1rem;
-  border: solid 0.2rem hsl(0, 0%, 0%);
+  border: solid 0.2rem hwb(0 0% 0%);
   border-left: none;
   background: linear-gradient(
-    hwb(0 19% 80%), 
-    #000000ba,
-      hwb(0 19% 80%)
+    #5b0707, 
+    hsla(0, 0%, 0%, 0.589),
+    #5b0707
       );
 }
 
 
-
-
-
-.your-pokemon-div{
-  position:absolute;
-  left: 12%;
-  top: 35%;
-}
-
-.your-pokemon-img{
-  image-rendering: pixelated;
-  width: calc(25vw + 25vh); 
-  height: auto; 
+.pokemon-name {
+  text-transform: capitalize;
+  font-family: 'Press Start 2P';
+  font-size: calc(1rem + 1dvw + 1dvh);;
+  padding-bottom: 1.5rem;
 }
 
 
-
-.enemy-pokemon-div {
+.your-pokemon-img-div{
   position: absolute;
-  right: 24%;
-  top: 20%;
+  left: 15%;
+  top: 35%;
+  overflow: hidden;
 }
 
 
+.your-pokemon-img {
+  width: 45dvw; 
+  max-width: 900px; 
+  height: 40dvw;
+  max-height: 650px;
+  object-fit: contain; 
+  image-rendering: pixelated; 
+}
+
+
+
+.enemy-pokemon-img-div {
+  position: absolute;
+  left: 55%;
+  top: 30%;
+  overflow: hidden;
+}
 
 .enemy-pokemon-img {
-  image-rendering: pixelated;
-  width: calc(15vw + 15vh);
-  height: auto; 
+  width: 20vw; 
+  max-width: 350px; 
+  height: 15dvw;
+  max-height: 300px;
+  object-fit: contain;
+  image-rendering: pixelated; 
+  right: 5%;
+  top: 30%;
 }
 
 
+.fight-btns {
+  position: absolute;
+  display: flex;
+  right: 1%;
+  top: 70%;
+  justify-content: center;
+  flex-direction: column ;
+  
+  width: 20%;
+  gap: 10px;
+  margin-top: 20px;
+}
 
 
-
+.btn{
+  font-size: calc(1rem + 0.2dvw + 0.2dvh);
+  padding: 1rem;
+  background: linear-gradient(
+    hwb(194 0% 10% / 0.421), 
+    hwb(0 0% 100% / 0.391),
+    hwb(194 0% 10% / 0.421)
+      );
+      border: solid 2px hwb(187 0% 0%);
+}

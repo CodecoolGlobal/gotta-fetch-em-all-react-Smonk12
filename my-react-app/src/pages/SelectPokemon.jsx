@@ -1,23 +1,26 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import './SelectPokemon.css';
 import UserPokemon from '../components/UserPokemon';
 
 function SelectPokemonApp() {
   const [userPokemons, setUserPokemons] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [randomPokemonGIF, setRandomPokemonGIF] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const { randomPokemon } = location.state || {}; // Get selected Pokémon from previous page
   const [randomPokemonStats, setRandomPokemonStats] = useState([]);
   const { usersPokemonUrls } = location.state || {};
 
-  
   useEffect(() => {
     const fetchPokemonStats = async () => {
       try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemon}`);
         const data = await response.json();
-        setRandomPokemonStats(data)
+        setRandomPokemonStats(data);
+        const gifUrl = data.sprites.versions["generation-v"]["black-white"].animated.front_default;
+        setRandomPokemonGIF(gifUrl);
       } catch (error) {
         console.error('Error fetching locations:', error);
       }
@@ -26,7 +29,6 @@ function SelectPokemonApp() {
       fetchPokemonStats();
     }
   }, [randomPokemon]);
-
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -45,7 +47,7 @@ function SelectPokemonApp() {
 
   function handleSelectPokemon(pokemon) {
     setSelectedPokemon(pokemon);
-    navigate('/fight', { state: { selectedPokemon: pokemon, enemyPokemon: randomPokemonStats } });
+    navigate('/fight', { state: { selectedPokemon: pokemon, enemyPokemon: randomPokemonStats, usersPokemonUrls, userPokemons} });
   }
 
   return (
@@ -59,7 +61,8 @@ function SelectPokemonApp() {
             onClick={() => handleSelectPokemon(userpokemon)}
           />
         ))}
-        <p>Enemy Pokémon: {randomPokemon}</p>
+            
+        <div><img className='random-pokemon-img' src={randomPokemonGIF} alt={randomPokemon} />Enemy Pokémon: {randomPokemon}</div>
       </div>
     </>
   );

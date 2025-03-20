@@ -1,0 +1,10 @@
+.random-pokemon-img {
+    width: 10dvw; 
+    max-width: 400px; 
+    height: 10dvw;
+    max-height: 2000px;
+    object-fit: contain; 
+    image-rendering: pixelated; 
+  }
+
+
