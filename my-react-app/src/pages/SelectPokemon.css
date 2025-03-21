@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    color: var(--color-text, white);
+    text-decoration: none;
+}
+
+body {
+    background-color: #1a1a1a; 
+    font-family: Arial, sans-serif;
+    height: 100%;
+    font-family: 'Press Start 2P',
+}
+.select-container {
+    height: 100%;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.user-pokemons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #2a2a2a; 
+    border-bottom: 2px solid white; 
+    overflow-y: auto; 
+    padding: 20px;
+}
+.poke-list {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+.back-btn {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    background-color: hsl(0, 0%, 22%);
+    margin: 5px;
+    background-color: #222; 
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-family: 'Press Start 2P', cursive;
+    color: white 
+}
+
+.poke-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    border: 2px solid #ffcc00; 
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+}
+
+.poke-container:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(255, 204, 0, 0.5); 
+}
+.user-pokemon {
+    font-family: 'Press Start 2P';
+    padding-top: 3px;
+}
+.user-pokemon::first-letter {
+    text-transform: uppercase;
+}
+.sprite {
+    width: 120px;
+    height: auto;
+}
+
+.stat {
+    font-size: 0.7rem;
+    font-family: 'Press Start 2P';
+    color: white;
+    display: flex;
+    margin: 3px;
+    padding: 3px;
+    
+}
+
+.enemy-pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1; 
+    background-color: #222; 
+    padding: 20px;
+    text-align: center;
+}
+
+.enemy-pokemon h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: tomato; 
+}
+
+.enemy-pokemon p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-family: 'Press Start 2P';
+    text-transform: capitalize;
+}
+.enemy-pokemon p::first-letter {
+    text-transform: uppercase;
+}

@@ -1,15 +1,27 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    color: var(--color-text, white);
+    text-decoration: none;
 }
+
+body {
+    background-color: #1a1a1a; 
+    font-family: Arial, sans-serif;
+    height: 100%;
+    font-family: 'Press Start 2P',
+}
+
+
 
 #root {
-  width: 100vw; 
-  height: 100vh; 
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
-
 
 
 .background-img {
@@ -17,7 +29,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; 
+  height: 100vh;
   z-index: -1;
   object-fit: fill;
 }
@@ -32,45 +44,87 @@ ul.area-buttons {
   list-style: none;
 }
 
-button {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+
+@keyframes movingGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+.area-buttons button {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: white;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: calc(0.6rem + 0.1dvw) calc(0.6rem + 0.1dvw);
-  font-size: calc(0.8rem + 0.1dvw); 
-  background-color: #0d0d0d;
+  background: linear-gradient(270deg,
+      rgb(255, 0, 0),
+      rgb(110, 0, 0),
+      hsl(0, 100%, 14%),
+      rgb(110, 0, 0),
+      hsla(0, 100%, 50%, 0.43));
+  border: 2px solid black;
+  padding: calc(0.4rem + 0.1dvw);
+  font-size: calc(0.3rem + 0.1dvw + 0.1dvh);
+
   cursor: pointer;
   transition: border-color 0.25s;
+  background-size: 400% 400%;
+  animation: movingGradient 6s infinite alternate;
+  font-family: 'Press Start 2P';
+}
+
+
+
+
+button {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+  border-radius: 8px;
+  background: linear-gradient(270deg,
+      hwb(194 0% 0% / 0.023),
+      rgba(0, 176, 230, 0.059),
+      hwb(189 0% 0% / 0.391),
+      rgba(0, 176, 230, 0.059),
+      hwb(194 0% 0% / 0.023));
+  border: 0px solid transparent;
+  padding: calc(0.6rem + 0.1dvw) calc(0.6rem + 0.1dvw);
+  font-size: calc(0.4rem + 0.3dvw);
+
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background-size: 400% 400%;
+  animation: movingGradient 4s infinite alternate;
+  font-family: 'Press Start 2P';
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: hsl(191, 100%, 50%);
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 button::first-letter {
   text-transform: uppercase;
 }
 
- .canalave-city {
+
+
+.canalave-city {
   position: absolute;
-  top: 71%;
-  left: 12.7%;
+  height: 6%;
+  width: 6%;
+  color: transparent;
+  top: 66.5%;
+  left: 12.9%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 .canalave-city-area {
   position: absolute;
-  top: 62%;
+  top: 61%;
   left: 12.7%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -85,26 +139,28 @@ button::first-letter {
 
 .eterna-city {
   position: absolute;
-  top: 48.5%;
-  left: 39.5%;
+  top: 43.9%;
+  left: 39.4%;
+  color: transparent;
+  height: 6%;
+  width: 5%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 .eterna-city-area {
   position: absolute;
-  top: 39%;
+  top: 38%;
   left: 39.5%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .eterna-city-west-gate {
   position: absolute;
   top: 43%;
-  left: 34%;
+  left: 32%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -124,18 +180,20 @@ button::first-letter {
 
 .pastoria-city {
   position: absolute;
-  top: 87%;
-  left: 65.5%;
+  top: 81.6%;
+  left: 66.6%;
+  color: transparent;
+  height: 8%;
+  width: 8%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 .pastoria-city-area {
   position: absolute;
-  top: 77.5%;
-  left: 66.5%;
+  top: 81.9%;
+  left: 74.4%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -152,19 +210,21 @@ button::first-letter {
 
 .sunyshore-city {
   position: absolute;
-  top: 78.5%;
-  left: 88%;
+  top: 71.6%;
+  left: 89.3%;
+  color: transparent;
+  height: 10%;
+  width: 9%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 
 .sunyshore-city-area {
   position: absolute;
-  top: 66%;
-  left: 88%;
+  top: 63.7%;
+  left: 88.6%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -180,10 +240,11 @@ button::first-letter {
 
 .sinnoh-pokemon-league {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 52%;
   left: 86%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .sinnoh-pokemon-league-area {
@@ -191,9 +252,8 @@ button::first-letter {
   top: 42%;
   left: 86%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
-
 
 
 
@@ -215,26 +275,28 @@ button::first-letter {
 
 .oreburgh-mine {
   position: absolute;
-  top: 80.5%;
-  left: 39%;
+  top: 76.9%;
+  left: 39.2%;
+  color: transparent;
+  height: 5%;
+  width: 6%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 .oreburgh-mine-1f {
   position: absolute;
   top: 77%;
-  left: 33%;
+  left: 31%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .oreburgh-mine-b1f {
   position: absolute;
   top: 77%;
-  left: 45.5%;
+  left: 47.5%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -256,10 +318,11 @@ button::first-letter {
 
 .valley-windworks {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 57%;
   left: 32%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .valley-windworks-area {
@@ -267,7 +330,7 @@ button::first-letter {
   top: 53%;
   left: 32%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -283,18 +346,20 @@ button::first-letter {
 
 .eterna-forest {
   position: absolute;
-  top: 48%;
-  left: 31%;
-  transform: translate(-50%, -50%);
-  width:max-content;
+  top: 41.9%;
+  left: 27.6%;
+  color: transparent;
+  height: 8%;
+  width: 10%;
+  transform: rotate(40deg);
 }
 
 .eterna-forest-area {
   position: absolute;
   top: 42%;
   left: 34%;
+  width: max-content;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 
@@ -308,10 +373,11 @@ button::first-letter {
 
 .fuego-ironworks {
   position: absolute;
-  top: 51%;
-  left: 26.5%;
+  -webkit-text-stroke: 0.5px black;
+  top: 53%;
+  left: 24%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .fuego-ironworks-area {
@@ -319,7 +385,7 @@ button::first-letter {
   top: 55%;
   left: 21%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -334,10 +400,12 @@ button::first-letter {
 
 .mt-coronet {
   position: absolute;
-  top: 54%;
-  left: 45%;
+  top: 57%;
+  left: 45.2%;
+  color: transparent;
+  height: 5%;
+  width: 13%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 .mt-coronet-1f-from-exterior {
@@ -345,7 +413,7 @@ button::first-letter {
   top: 50.5%;
   left: 45%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-exterior-snowfall {
@@ -353,7 +421,7 @@ button::first-letter {
   top: 47%;
   left: 45%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -362,7 +430,7 @@ button::first-letter {
   top: 43.5%;
   left: 45%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -372,7 +440,7 @@ button::first-letter {
   top: 61%;
   left: 42%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -381,7 +449,7 @@ button::first-letter {
   top: 32%;
   left: 45%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-1f-route-211 {
@@ -389,7 +457,7 @@ button::first-letter {
   top: 38%;
   left: 46%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-2f {
@@ -397,7 +465,7 @@ button::first-letter {
   top: 54%;
   left: 35%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-3f {
@@ -405,7 +473,7 @@ button::first-letter {
   top: 50%;
   left: 36%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-4f {
@@ -413,7 +481,7 @@ button::first-letter {
   top: 46%;
   left: 37%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-4f-small-room {
@@ -421,7 +489,7 @@ button::first-letter {
   top: 46%;
   left: 30%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -430,7 +498,7 @@ button::first-letter {
   top: 54%;
   left: 55%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-6f {
@@ -438,7 +506,7 @@ button::first-letter {
   top: 50%;
   left: 54%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .mt-coronet-b1f {
@@ -446,7 +514,7 @@ button::first-letter {
   top: 46%;
   left: 53%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -467,10 +535,12 @@ button::first-letter {
 
 .great-marsh {
   position: absolute;
-  top: 73%;
-  left: 58%;
-  transform: translate(-50%, -50%);
-  width:max-content;
+  top: 71.8%;
+  left: 49.7%;
+  color: transparent;
+  height: 8%;
+  width: 20%;
+  transform: rotate(-26deg);
 }
 
 .great-marsh-area-1 {
@@ -478,7 +548,7 @@ button::first-letter {
   top: 74%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .great-marsh-area-2 {
@@ -486,7 +556,7 @@ button::first-letter {
   top: 75%;
   left: 67%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .great-marsh-area-3 {
@@ -494,7 +564,7 @@ button::first-letter {
   top: 87%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -503,7 +573,7 @@ button::first-letter {
   top: 67%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .great-marsh-area-5 {
@@ -511,7 +581,7 @@ button::first-letter {
   top: 88%;
   left: 60%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -520,7 +590,7 @@ button::first-letter {
   top: 84%;
   left: 56%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -538,36 +608,38 @@ button::first-letter {
 
 .solaceon-ruins {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 53%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 /* ...................... */
 .solaceon-ruins-1f {
   position: absolute;
   top: 57%;
-  left: 62%;
+  left: 60%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-2f {
   position: absolute;
   top: 57%;
-  left: 68%;
+  left: 70%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
+
 /* ...................... */
 
 .solaceon-ruins-b1f-a {
   position: absolute;
   top: 60.5%;
-  left: 58%;
+  left: 56%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-b1f-b {
@@ -575,23 +647,24 @@ button::first-letter {
   top: 60.5%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-b1f-c {
   position: absolute;
   top: 60.5%;
-  left: 72%;
+  left: 74%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
+
 /* ...................... */
 .solaceon-ruins-b2f-a {
   position: absolute;
   top: 64%;
-  left: 58%;
+  left: 56%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-b2f-b {
@@ -599,16 +672,16 @@ button::first-letter {
   top: 64%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
 .solaceon-ruins-b2f-c {
   position: absolute;
   top: 64%;
-  left: 72%;
+  left: 74%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 /* ...................... */
@@ -616,18 +689,18 @@ button::first-letter {
 .solaceon-ruins-b3f-a {
   position: absolute;
   top: 67.5%;
-  left: 51%;
+  left: 48%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
 .solaceon-ruins-b3f-b {
   position: absolute;
   top: 67.5%;
-  left: 58%;
+  left: 56%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -636,24 +709,24 @@ button::first-letter {
   top: 67.5%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
 .solaceon-ruins-b3f-d {
   position: absolute;
   top: 67.5%;
-  left: 72%;
+  left: 74%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-b3f-e {
   position: absolute;
   top: 67.5%;
-  left: 79%;
+  left: 82%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 /* ...................... */
@@ -661,34 +734,35 @@ button::first-letter {
 .solaceon-ruins-b4f-a {
   position: absolute;
   top: 71%;
-  left: 54.5%;
+  left: 52%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-b4f-b {
   position: absolute;
   top: 71%;
-  left: 61.5%;
+  left: 60%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-b4f-c {
   position: absolute;
   top: 71%;
-  left: 68.5%;
+  left: 70%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .solaceon-ruins-b4f-d {
   position: absolute;
   top: 71%;
-  left: 75.5%;
+  left: 78%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
+
 /* ...................... */
 
 .solaceon-ruins-b5f {
@@ -696,7 +770,7 @@ button::first-letter {
   top: 74.5%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
@@ -721,11 +795,57 @@ button::first-letter {
 
 .sinnoh-victory-road {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 57%;
+  left: 87%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+}
+
+.sinnoh-victory-road-inside {
+  position: absolute;
+  top: 61.5%;
   left: 87%;
   transform: translate(-50%, -50%);
   width:max-content;
 }
+.sinnoh-victory-road-inside-exit {
+  position: absolute;
+  top: 66%;
+  left: 87%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-1f {
+  position: absolute;
+  top: 47%;
+  left: 78%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-2f {
+  position: absolute;
+  top: 47%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-b1f {
+  position: absolute;
+  top: 52%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.sinnoh-victory-road-inside-b1f {
+  position: absolute;
+  top: 52%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
 
 
 
@@ -740,15 +860,58 @@ button::first-letter {
 
 .ravaged-path {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 64%;
   left: 26.5%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+}
+
+.ravaged-path-area {
+  position: absolute;
+  top: 59%;
+  left: 27.8%;
   transform: translate(-50%, -50%);
   width:max-content;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .oreburgh-gate {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 71%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+}
+
+.oreburgh-gate-1f {
+  position: absolute;
+  top: 66%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.oreburgh-gate-b1f {
+  position: absolute;
+  top: 76%;
   left: 33%;
   transform: translate(-50%, -50%);
   width:max-content;
@@ -756,9 +919,54 @@ button::first-letter {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .stark-mountain {
   position: absolute;
-  top: 14.5%;
+  top: 16.6%;
+  left: 71.4%;
+  color: transparent;
+  height: 6%;
+  width: 15%;
+  transform: translate(-50%, -50%);
+}
+
+.stark-mountain-area {
+  position: absolute;
+  top: 9.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.stark-mountain-entrance {
+  position: absolute;
+  top: 24.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.stark-mountain-inside {
+  position: absolute;
+  top: 21.5%;
+  left: 71.5%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.stark-mountain-heatran-chamber {
+  position: absolute;
+  top: 29.5%;
   left: 71.5%;
   transform: translate(-50%, -50%);
   width:max-content;
@@ -766,33 +974,122 @@ button::first-letter {
 
 
 
+
+
+
+
+
+
+
 .spring-path {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 66%;
   left: 76%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 .turnback-cave {
   position: absolute;
+  -webkit-text-stroke: 0.5px black;
   top: 60%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+}
+
+
+.turnback-cave-before-pillar-1 {
+  position: absolute;
+  top: 37.5%;
   left: 76%;
   transform: translate(-50%, -50%);
   width:max-content;
 }
+.turnback-cave-pillar-1 {
+  position: absolute;
+  top: 42%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-between-pillars-1-and-2 {
+  position: absolute;
+  top: 46.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-pillar-2 {
+  position: absolute;
+  top: 51%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-between-pillars-2-and-3 {
+  position: absolute;
+  top: 55.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-pillar-3 {
+  position: absolute;
+  top: 64.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.turnback-cave-after-pillar-3 {
+  position: absolute;
+  top: 69.5%;
+  left: 76%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 .snowpoint-temple {
   position: absolute;
-  top: 19.5%;
+  top: 15.1%;
   left: 45.5%;
+  color: transparent;
+  height: 6%;
+  width: 7%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 .snowpoint-temple-1f {
@@ -800,7 +1097,7 @@ button::first-letter {
   top: 16%;
   left: 37%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .snowpoint-temple-b1f {
@@ -808,7 +1105,7 @@ button::first-letter {
   top: 13%;
   left: 38%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .snowpoint-temple-b2f {
@@ -816,7 +1113,7 @@ button::first-letter {
   top: 10%;
   left: 39%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .snowpoint-temple-b3f {
@@ -824,7 +1121,7 @@ button::first-letter {
   top: 16%;
   left: 54%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .snowpoint-temple-b4f {
@@ -832,7 +1129,7 @@ button::first-letter {
   top: 13%;
   left: 53%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 .snowpoint-temple-b5f {
@@ -840,18 +1137,33 @@ button::first-letter {
   top: 10%;
   left: 52%;
   transform: translate(-50%, -50%);
-  width:max-content;
+  width: max-content;
 }
 
 
 
 .wayward-cave {
   position: absolute;
-  top: 64%;
-  left: 36%;
+  top: 60.9%;
+  left: 36.1%;
+  color: transparent;
+  height: 6%;
+  width: 7%;
   transform: translate(-50%, -50%);
-  width:max-content;
 }
 
 
-
+.wayward-cave-1f {
+  position: absolute;
+  top: 55%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}
+.wayward-cave-b1f {
+  position: absolute;
+  top: 67%;
+  left: 36.9%;
+  transform: translate(-50%, -50%);
+  width:max-content;
+}

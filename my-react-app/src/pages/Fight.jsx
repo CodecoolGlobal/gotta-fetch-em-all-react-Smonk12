@@ -1,18 +1,35 @@
-import { useLocation } from 'react-router-dom';
+
+
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Fight.css';
 import { useState, useEffect } from 'react';
 
+
 function Fight() {
+
   const location = useLocation();
   const navigate = useNavigate();
   const { selectedPokemon, enemyPokemon, usersPokemonUrls, userPokemons, randomPokemon } = location.state || {};
+
 
   if (!selectedPokemon || !enemyPokemon) {
     return <div>Loading...</div>;
   }
 
-  let enemyPokemonGIF = enemyPokemon.sprites.versions["generation-v"]["black-white"].animated.front_default;
-  let selectedPokemonGIF = selectedPokemon.sprites.versions["generation-v"]["black-white"].animated.back_default;
+
+  const fightMaps = [
+    "fight1.png", "fight2.png", "fight3.png", "fight4.png", "fight5.png", 
+    "fight6.png", "fight7.png", "fight8.png"
+  ];
+  const [selectedMap, setSelectedMap] = useState(fightMaps[Math.floor(Math.random() * fightMaps.length)]);
+
+
+
+
+  let enemyPokemonGIF = enemyPokemon.sprites.versions["generation-v"]["black-white"].animated.front_default
+  let selectedPokemonGIF = selectedPokemon.sprites.versions["generation-v"]["black-white"].animated.back_default
+
+
 
   const [playerHP, setPlayerHP] = useState(0);
   const [enemyHP, setEnemyHP] = useState(0);
@@ -21,11 +38,13 @@ function Fight() {
   const [isAttackDisabled, setIsAttackDisabled] = useState(false);
   const [battleText, setBattleText] = useState("The Battle Begins!");
 
-  const fightMaps = [
-    "fight1.png", "fight2.png", "fight3.png", "fight4.png", "fight5.png", 
-    "fight6.png", "fight7.png", "fight8.png"
-  ];
-  const [selectedMap, setSelectedMap] = useState(fightMaps[Math.floor(Math.random() * fightMaps.length)]);
+
+
+
+
+
+
+
 
   useEffect(() => {
     if (selectedPokemon && enemyPokemon) {
@@ -33,6 +52,7 @@ function Fight() {
       setEnemyHP(enemyPokemon.stats[0].base_stat);
     }
   }, [selectedPokemon, enemyPokemon]);
+
 
   const calculateDamage = (attacker, defender) => {
     const attack = attacker.stats[1].base_stat;
@@ -45,21 +65,22 @@ function Fight() {
     return finalDamage;
   };
 
+
   const handleAttack = () => {
     if (battleOver || playerHP === 0 || enemyHP === 0) {
-      return; 
+      return;
     }
-
+  
     setIsAttackDisabled(true);
     setBattleText(`${selectedPokemon.name} attacks!`);
-
+  
     const damageToEnemy = calculateDamage(selectedPokemon, enemyPokemon);
+  
 
- 
     let newEnemyHP = Math.max(enemyHP - damageToEnemy, 0);
-
+  
     setEnemyHP(newEnemyHP);
-
+  
     if (newEnemyHP === 0) {
       setBattleOver(true);
       setCatchedPokemon(enemyPokemon.name);
@@ -67,16 +88,18 @@ function Fight() {
       setIsAttackDisabled(true);
       return;
     }
+  
 
     setTimeout(() => {
-      if (battleOver) return;
-
+      if (battleOver) return; 
+  
       setBattleText(`${enemyPokemon.name} attacks!`);
       const damageToPlayer = calculateDamage(enemyPokemon, selectedPokemon);
-
+  
       let newPlayerHP = Math.max(playerHP - damageToPlayer, 0);
       setPlayerHP(newPlayerHP);
-
+  
+  
       if (newPlayerHP === 0) {
         setBattleOver(true);
         setCatchedPokemon("You lost!");
@@ -85,20 +108,23 @@ function Fight() {
       } else {
         setIsAttackDisabled(false);
       }
-    }, 0);
+    }, 1000);
   };
+  
 
   useEffect(() => {
     if (battleOver) {
       setIsAttackDisabled(true);
     }
   }, [battleOver]);
+  
+  
 
   useEffect(() => {
     if (catchedPokemon === "You lost!" && battleOver === true) {
-      setIsAttackDisabled(true);
-      setTimeout(() => navigate('/'), 1000);
-      setIsAttackDisabled(false);
+      setIsAttackDisabled(true)
+      setTimeout(() => navigate('/'), 999);
+      setIsAttackDisabled(false)
     }
   }, []);
 
@@ -106,10 +132,13 @@ function Fight() {
     if (catchedPokemon) {
       console.log("Catched Pokémon:", catchedPokemon);
       if (battleOver === true) {
-        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 1000);
+        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 999);
       }
     }
   }, [catchedPokemon]);
+
+
+
 
   return (
     <div className="fight-background">
@@ -118,18 +147,18 @@ function Fight() {
         className="fight-background-img" 
         alt="Background Image" 
       />
-
+  
       <div>
         <h1 className='top-text'>{battleText}</h1>
       </div>
-
+  
       <div className="pokemon-content">
         <div className='your-pokemon-img-div'>
           {selectedPokemon.sprites && (
             <img className='your-pokemon-img' src={selectedPokemonGIF} alt={selectedPokemon.name} />
           )}
         </div>
-
+  
         <div className='your-pokemon-stats-div'>
           <div>
             <h1 className='pokemon-name'>{selectedPokemon.name}</h1>
@@ -145,7 +174,7 @@ function Fight() {
           )}
         </div>
       </div>
-
+  
       <div className="enemy-content">
         <div className='enemy-pokemon-img-div'>
           {enemyPokemon.sprites && (
@@ -167,7 +196,7 @@ function Fight() {
           )}
         </div>
       </div>
-
+  
       <div className='fight-btns'>
         <button className='attack-btn btn' onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
         <button className='select-diff-btn btn' onClick={() => navigate('/select-pokemon', { state: { usersPokemonUrls, userPokemons, randomPokemon } })}>Select different Pokémon</button>
@@ -175,6 +204,14 @@ function Fight() {
       </div>
     </div>
   );
+  
 }
 
 export default Fight;
+
+
+
+
+
+
+
