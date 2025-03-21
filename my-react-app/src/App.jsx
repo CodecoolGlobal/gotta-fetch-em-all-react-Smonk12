@@ -82,7 +82,7 @@ function App() {
   return (
     <div>
       {location.pathname === '/' && (
-        <img src="./src/assets/k5ocr0kntvm21.jpg" className="background-img" alt="Background Image" />
+        <img src="./src/assets/map1.jpg" className="background-img" alt="Background Image" />
       )}
       <Routes>
         {/* Home Page: Select Area */}

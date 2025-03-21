@@ -4,55 +4,175 @@ import { useState, useEffect } from 'react';
 
 function Fight() {
   const location = useLocation();
-  const { selectedPokemon, enemyPokemon } = location.state || {};
+  const navigate = useNavigate();
+  const { selectedPokemon, enemyPokemon, usersPokemonUrls, userPokemons, randomPokemon } = location.state || {};
 
   if (!selectedPokemon || !enemyPokemon) {
     return <div>Loading...</div>;
   }
 
+  let enemyPokemonGIF = enemyPokemon.sprites.versions["generation-v"]["black-white"].animated.front_default;
+  let selectedPokemonGIF = selectedPokemon.sprites.versions["generation-v"]["black-white"].animated.back_default;
+
+  const [playerHP, setPlayerHP] = useState(0);
+  const [enemyHP, setEnemyHP] = useState(0);
+  const [battleOver, setBattleOver] = useState(false);
+  const [catchedPokemon, setCatchedPokemon] = useState("");
+  const [isAttackDisabled, setIsAttackDisabled] = useState(false);
+  const [battleText, setBattleText] = useState("The Battle Begins!");
+
+  const fightMaps = [
+    "fight1.png", "fight2.png", "fight3.png", "fight4.png", "fight5.png", 
+    "fight6.png", "fight7.png", "fight8.png"
+  ];
+  const [selectedMap, setSelectedMap] = useState(fightMaps[Math.floor(Math.random() * fightMaps.length)]);
+
+  useEffect(() => {
+    if (selectedPokemon && enemyPokemon) {
+      setPlayerHP(selectedPokemon.stats[0].base_stat);
+      setEnemyHP(enemyPokemon.stats[0].base_stat);
+    }
+  }, [selectedPokemon, enemyPokemon]);
+
+  const calculateDamage = (attacker, defender) => {
+    const attack = attacker.stats[1].base_stat;
+    const defense = defender.stats[2].base_stat;
+
+    const randomFactor = Math.floor(Math.random() * (255 - 217 + 1)) + 217;
+    const baseDamage = ((2 / 5 + 2) * attack * 60) / (defense * 50) + 2;
+    const finalDamage = Math.floor(baseDamage * (randomFactor / 255));
+
+    return finalDamage;
+  };
+
+  const handleAttack = () => {
+    if (battleOver || playerHP === 0 || enemyHP === 0) {
+      return; 
+    }
+
+    setIsAttackDisabled(true);
+    setBattleText(`${selectedPokemon.name} attacks!`);
+
+    const damageToEnemy = calculateDamage(selectedPokemon, enemyPokemon);
+
+ 
+    let newEnemyHP = Math.max(enemyHP - damageToEnemy, 0);
+
+    setEnemyHP(newEnemyHP);
+
+    if (newEnemyHP === 0) {
+      setBattleOver(true);
+      setCatchedPokemon(enemyPokemon.name);
+      setBattleText(`${selectedPokemon.name} Won!`);
+      setIsAttackDisabled(true);
+      return;
+    }
+
+    setTimeout(() => {
+      if (battleOver) return;
+
+      setBattleText(`${enemyPokemon.name} attacks!`);
+      const damageToPlayer = calculateDamage(enemyPokemon, selectedPokemon);
+
+      let newPlayerHP = Math.max(playerHP - damageToPlayer, 0);
+      setPlayerHP(newPlayerHP);
+
+      if (newPlayerHP === 0) {
+        setBattleOver(true);
+        setCatchedPokemon("You lost!");
+        setBattleText(`${enemyPokemon.name} Won!`);
+        setIsAttackDisabled(true);
+      } else {
+        setIsAttackDisabled(false);
+      }
+    }, 0);
+  };
+
+  useEffect(() => {
+    if (battleOver) {
+      setIsAttackDisabled(true);
+    }
+  }, [battleOver]);
+
+  useEffect(() => {
+    if (catchedPokemon === "You lost!" && battleOver === true) {
+      setIsAttackDisabled(true);
+      setTimeout(() => navigate('/'), 1000);
+      setIsAttackDisabled(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (catchedPokemon) {
+      console.log("Catched Pokémon:", catchedPokemon);
+      if (battleOver === true) {
+        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 1000);
+      }
+    }
+  }, [catchedPokemon]);
+
   return (
     <div className="fight-background">
-      <h1>Battle Begins!</h1>
+      <img 
+        src={`./src/assets/${selectedMap}`} 
+        className="fight-background-img" 
+        alt="Background Image" 
+      />
+
       <div>
-        <div className='your-pokemon-div'>
-      {selectedPokemon.sprites && (
-          <img className='your-pokemon-img' src={selectedPokemon.sprites.back_default} alt={selectedPokemon.name} />
-        )}
+        <h1 className='top-text'>{battleText}</h1>
+      </div>
+
+      <div className="pokemon-content">
+        <div className='your-pokemon-img-div'>
+          {selectedPokemon.sprites && (
+            <img className='your-pokemon-img' src={selectedPokemonGIF} alt={selectedPokemon.name} />
+          )}
         </div>
 
-<div className='your-pokemon-stats'>
-        <h2>Your Pokémon</h2>
-        <p>Name: {selectedPokemon.name}</p>
-        {selectedPokemon.stats && (
-          <>
-            <p>HP: {selectedPokemon.stats[0].base_stat}</p>
-            <p>Attack: {selectedPokemon.stats[1].base_stat}</p>
-            <p>Defense: {selectedPokemon.stats[2].base_stat}</p>
-          </>
-        )}
+        <div className='your-pokemon-stats-div'>
+          <div>
+            <h1 className='pokemon-name'>{selectedPokemon.name}</h1>
+          </div>
+          {selectedPokemon.stats && (
+            <>
+              <div>
+                <p><img className='heart' src="./src/assets/friendly-heart.png" alt="heart-icon" />HP: {playerHP}</p>
+                <p><img className='attack' src="./src/assets/attack.png" alt="attack-icon" />Attack: {selectedPokemon.stats[1].base_stat}</p>
+                <p><img className='defense' src="./src/assets/defense.png" alt="defense-icon" />Defense: {selectedPokemon.stats[2].base_stat}</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
-      <div>
-      <div className='enemy-pokemon-div'>
-        {enemyPokemon.sprites && (
-          <img className='enemy-pokemon-img' src={enemyPokemon.sprites.front_default} alt={enemyPokemon.name} />
-        )}
-</div>
-<div className='enemy-pokemon-stats'>
-        <h2>Enemy Pokémon</h2>
-        <p>Name: {enemyPokemon.name}</p>
-        {enemyPokemon.stats && (
-          <>
-            <p>HP: {enemyPokemon.stats[0].base_stat}</p>
-            <p>Attack: {enemyPokemon.stats[1].base_stat}</p>
-            <p>Defense: {enemyPokemon.stats[2].base_stat}</p>
 
-          </>
-        )}
+      <div className="enemy-content">
+        <div className='enemy-pokemon-img-div'>
+          {enemyPokemon.sprites && (
+            <img className='enemy-pokemon-img' src={enemyPokemonGIF} alt={enemyPokemon.name} />
+          )}
+        </div>
+        <div className='enemy-pokemon-stats-div'>
+          <div>
+            <h1 className='pokemon-name'>{enemyPokemon.name}</h1>
+          </div>
+          {enemyPokemon.stats && (
+            <>
+              <div>
+                <p><img className='heart' src="./src/assets/enemy-heart.png" alt="heart-icon" />HP: {enemyHP}</p>
+                <p><img className='attack' src="./src/assets/attack.png" alt="attack-icon" />Attack: {enemyPokemon.stats[1].base_stat}</p>
+                <p><img className='defense' src="./src/assets/defense.png" alt="defense-icon" />Defense: {enemyPokemon.stats[2].base_stat}</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
-      <button>Attack</button>
-      <button>Run</button>
+
+      <div className='fight-btns'>
+        <button className='attack-btn btn' onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
+        <button className='select-diff-btn btn' onClick={() => navigate('/select-pokemon', { state: { usersPokemonUrls, userPokemons, randomPokemon } })}>Select different Pokémon</button>
+        <button className='run-btn btn' onClick={() => navigate('/')}>Run</button>
+      </div>
     </div>
   );
 }

@@ -4,44 +4,63 @@
   box-sizing: border-box;
 }
 
-
-
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-
-
-
-.fight-background {
-  background-image: url('/assets/fight.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100vw; 
-  height: 100vh; 
+.fight-background-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100vh; /* Make sure the image fully covers the viewport height */
+  overflow: hidden;
+  image-rendering: auto;
 }
 
-
-.fight-background h1 {
-  display:flex;
+.top-text {
+  display: flex;
+  color: #ffffff;
   flex-direction: column;
-align-items: center;
-background: linear-gradient(
-      hsl(0, 0%, 20%), 
-      hsl(0, 0%, 60%),
-      hsl(0, 0%, 20%)
-      );
-padding: 0.4rem;
-border: solid 1px hsl(0, 0%, 0%);
+  align-items: center;
+  font-size: calc(1rem + 1dvw + 1dvh);
+  background: linear-gradient(
+    rgb(110, 80, 0),
+    hwb(0 0% 100%),
+    rgb(110, 80, 0)
+  );
+  padding: 1rem;
+  border: none;
+  font-family: 'Press Start 2P';
+  border-bottom: solid 1px #985b00;
+  text-transform: capitalize;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 
 
+p{
+  display:flex;
+  font-family: 'Press Start 2P';
+  flex-direction: row-reverse;
+  font-size: calc(1rem + 0.4dvw + 0.4dvh);;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
 
-.your-pokemon-stats{
+}
+
+
+
+.pokemon-name::first-letter{
+  text-transform: uppercase;
+}
+
+.your-pokemon-stats-div{
   position: absolute;
   display:flex;
   align-items: center;
