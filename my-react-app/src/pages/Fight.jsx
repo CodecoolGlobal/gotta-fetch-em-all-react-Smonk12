@@ -97,7 +97,7 @@ function Fight() {
       } else {
         setIsAttackDisabled(false);
       }
-    }, 0);
+    }, 1000);
   };
   
 
@@ -112,7 +112,7 @@ function Fight() {
   useEffect(() => {
     if (catchedPokemon === "You lost!" && battleOver === true) {
       setIsAttackDisabled(true)
-      setTimeout(() => navigate('/'), 1000);
+      setTimeout(() => navigate('/'), 999);
       setIsAttackDisabled(false)
     }
   }, []);
@@ -121,7 +121,7 @@ function Fight() {
     if (catchedPokemon) {
       console.log("Catched Pokémon:", catchedPokemon);
       if (battleOver === true) {
-        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 1000);
+        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 999);
       }
     }
   }, [catchedPokemon]);
