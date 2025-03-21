@@ -6,7 +6,7 @@ import UserPokemon from '../components/UserPokemon';
 function SelectPokemonApp() {
   const [userPokemons, setUserPokemons] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
-  const [randomPokemonGIF, setRandomPokemonGIF] = useState("");
+  const [randomPokemonGIF, setRandomPokemonGIF] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const { randomPokemon } = location.state || {}; // Get selected Pokémon from previous page
@@ -47,24 +47,28 @@ function SelectPokemonApp() {
 
   function handleSelectPokemon(pokemon) {
     setSelectedPokemon(pokemon);
-    navigate('/fight', { state: { selectedPokemon: pokemon, enemyPokemon: randomPokemonStats, usersPokemonUrls, userPokemons} });
+    navigate('/fight', { state: { selectedPokemon: pokemon, enemyPokemon: randomPokemonStats, usersPokemonUrls, userPokemons,randomPokemon} });
   }
-
+console.log(randomPokemonStats)
   return (
-    <>
-      <div>
-        <h2>Your pokemons:</h2>
-        {userPokemons.map(userpokemon => (
-          <UserPokemon
-            key={userpokemon.name}
-            pokemon={userpokemon}
-            onClick={() => handleSelectPokemon(userpokemon)}
-          />
-        ))}
-            
-        <div><img className='random-pokemon-img' src={randomPokemonGIF} alt={randomPokemon} />Enemy Pokémon: {randomPokemon}</div>
+    <div className='select-container'>
+      <button className="back-btn" onClick={()=> navigate('/')}>Back to locations...</button>
+      <h2>Select your Pokemon:</h2>
+      <div className="poke-list">
+      {userPokemons.map(userpokemon => (
+        <UserPokemon
+          key={userpokemon.name}
+          pokemon={userpokemon}
+          onClick={() => handleSelectPokemon(userpokemon)}
+        />
+      ))}
       </div>
-    </>
+      <div className='enemy-pokemon'>
+     <img className='random-pokemon-img' src={randomPokemonGIF} alt={randomPokemon} />
+        <h2>Enemy Pokémon:</h2>
+        <p>{randomPokemon}</p>
+      </div>
+    </div>
   );
 }
 

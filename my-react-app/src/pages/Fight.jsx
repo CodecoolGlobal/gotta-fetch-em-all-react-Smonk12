@@ -7,7 +7,7 @@ function Fight() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { selectedPokemon, enemyPokemon, usersPokemonUrls, userPokemons } = location.state || {};
+  const { selectedPokemon, enemyPokemon, usersPokemonUrls, userPokemons, randomPokemon } = location.state || {};
 
 
   if (!selectedPokemon || !enemyPokemon) {
@@ -25,6 +25,11 @@ function Fight() {
   const [battleOver, setBattleOver] = useState(false);
   const [catchedPokemon, setCatchedPokemon] = useState("");
   const [isAttackDisabled, setIsAttackDisabled] = useState(false);
+  const [battleText, setBattleText] = useState("The Battle Begins!");
+
+
+
+
 
 
 
@@ -51,48 +56,63 @@ function Fight() {
 
 
   const handleAttack = () => {
+    if (battleOver || playerHP === 0 || enemyHP === 0) {
+      return; // Stop execution if the battle is already over
+    }
+  
     setIsAttackDisabled(true);
-    //if (battleOver) return; // Don't allow attacking if the battle is over.
-
-    if (battleOver === true) {
-      return;
-    };
-
+    setBattleText(`${selectedPokemon.name} attacks!`);
+  
     const damageToEnemy = calculateDamage(selectedPokemon, enemyPokemon);
-
-    setEnemyHP(prevHP => {
-      const newHP = Math.max(prevHP - damageToEnemy, 0);
-      if (newHP === 0) {
-        setBattleOver(true);
-        setCatchedPokemon(enemyPokemon.name);
-        console.log(enemyPokemon);
-
-        console.log("won");
-      }
-      return newHP;
-    });
+  
+    // Store the new HP in a variable before updating state
+    let newEnemyHP = Math.max(enemyHP - damageToEnemy, 0);
+  
+    setEnemyHP(newEnemyHP);
+  
+    if (newEnemyHP === 0) {
+      setBattleOver(true);
+      setCatchedPokemon(enemyPokemon.name);
+      setBattleText(`${selectedPokemon.name} Won!`);
+      setIsAttackDisabled(true);
+      return;
+    }
+  
 
     setTimeout(() => {
-      if (enemyHP > 0) {
-        const damageToPlayer = calculateDamage(enemyPokemon, selectedPokemon);
-        setPlayerHP(prevHP => {
-          const newHP = Math.max(prevHP - damageToPlayer, 0);
-          if (newHP === 0) {
-            setBattleOver(true);
-            setCatchedPokemon("You lost!");
-            console.log("enemy won");
-            setIsAttackDisabled(true)
-          }
-          return newHP;
-        });
-      } setIsAttackDisabled(false);
+      if (battleOver) return; 
+  
+      setBattleText(`${enemyPokemon.name} attacks!`);
+      const damageToPlayer = calculateDamage(enemyPokemon, selectedPokemon);
+  
+      let newPlayerHP = Math.max(playerHP - damageToPlayer, 0);
+      setPlayerHP(newPlayerHP);
+  
+  
+      if (newPlayerHP === 0) {
+        setBattleOver(true);
+        setCatchedPokemon("You lost!");
+        setBattleText(`${enemyPokemon.name} Won!`);
+        setIsAttackDisabled(true);
+      } else {
+        setIsAttackDisabled(false);
+      }
     }, 0);
   };
+  
+
+  useEffect(() => {
+    if (battleOver) {
+      setIsAttackDisabled(true);
+    }
+  }, [battleOver]);
+  
+  
 
   useEffect(() => {
     if (catchedPokemon === "You lost!" && battleOver === true) {
       setIsAttackDisabled(true)
-      setTimeout(() => navigate('/'), 999);
+      setTimeout(() => navigate('/'), 1000);
       setIsAttackDisabled(false)
     }
   }, []);
@@ -101,7 +121,7 @@ function Fight() {
     if (catchedPokemon) {
       console.log("Catched Pokémon:", catchedPokemon);
       if (battleOver === true) {
-        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 999);
+        setTimeout(() => navigate('/', { state: { newPokemon: catchedPokemon } }), 1000);
       }
     }
   }, [catchedPokemon]);
@@ -111,7 +131,7 @@ function Fight() {
 
   return (
     <div className="fight-background">
-      <h1 className='top-text'>The Battle Begins!</h1>
+      <h1 className='top-text'>{battleText}</h1>
       <div>
         <div className='your-pokemon-img-div'>
           {selectedPokemon.sprites && (
@@ -157,8 +177,8 @@ function Fight() {
       </div>
       <div className='fight-btns'>
       <button className='attack-btn btn' onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
-      <button className='select-diff-btn btn'>Select different Pokémon</button>
-      <button className='run-btn btn'>Run</button>
+      <button className='select-diff-btn btn' onClick={()=> navigate('/select-pokemon', { state: {usersPokemonUrls, userPokemons, randomPokemon}})}>Select different Pokémon</button>
+      <button className='run-btn btn' onClick={()=> navigate('/')}>Run</button>
       </div>
     </div>
   );
