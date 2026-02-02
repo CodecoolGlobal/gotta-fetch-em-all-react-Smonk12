@@ -1,3 +1,5 @@
+
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Fight.css';
 import { useState, useEffect } from 'react';
@@ -13,6 +15,15 @@ function Fight() {
   if (!selectedPokemon || !enemyPokemon) {
     return <div>Loading...</div>;
   }
+
+
+  const fightMaps = [
+    "fight1.png", "fight2.png", "fight3.png", "fight4.png", "fight5.png", 
+    "fight6.png", "fight7.png", "fight8.png"
+  ];
+  const [selectedMap, setSelectedMap] = useState(fightMaps[Math.floor(Math.random() * fightMaps.length)]);
+
+
 
 
   let enemyPokemonGIF = enemyPokemon.sprites.versions["generation-v"]["black-white"].animated.front_default
@@ -57,7 +68,7 @@ function Fight() {
 
   const handleAttack = () => {
     if (battleOver || playerHP === 0 || enemyHP === 0) {
-      return; // Stop execution if the battle is already over
+      return;
     }
   
     setIsAttackDisabled(true);
@@ -65,7 +76,7 @@ function Fight() {
   
     const damageToEnemy = calculateDamage(selectedPokemon, enemyPokemon);
   
-    // Store the new HP in a variable before updating state
+
     let newEnemyHP = Math.max(enemyHP - damageToEnemy, 0);
   
     setEnemyHP(newEnemyHP);
@@ -131,14 +142,23 @@ function Fight() {
 
   return (
     <div className="fight-background">
-      <h1 className='top-text'>{battleText}</h1>
+      <img 
+        src={`./src/assets/${selectedMap}`} 
+        className="fight-background-img" 
+        alt="Background Image" 
+      />
+  
       <div>
+        <h1 className='top-text'>{battleText}</h1>
+      </div>
+  
+      <div className="pokemon-content">
         <div className='your-pokemon-img-div'>
           {selectedPokemon.sprites && (
             <img className='your-pokemon-img' src={selectedPokemonGIF} alt={selectedPokemon.name} />
           )}
         </div>
-
+  
         <div className='your-pokemon-stats-div'>
           <div>
             <h1 className='pokemon-name'>{selectedPokemon.name}</h1>
@@ -147,14 +167,15 @@ function Fight() {
             <>
               <div>
                 <p><img className='heart' src="./src/assets/friendly-heart.png" alt="heart-icon" />HP: {playerHP}</p>
-                <p><img className='attack' src="./src/assets/attack.png" alt="heart-icon" />Attack: {selectedPokemon.stats[1].base_stat}</p>
+                <p><img className='attack' src="./src/assets/attack.png" alt="attack-icon" />Attack: {selectedPokemon.stats[1].base_stat}</p>
                 <p><img className='defense' src="./src/assets/defense.png" alt="defense-icon" />Defense: {selectedPokemon.stats[2].base_stat}</p>
               </div>
             </>
           )}
         </div>
       </div>
-      <div>
+  
+      <div className="enemy-content">
         <div className='enemy-pokemon-img-div'>
           {enemyPokemon.sprites && (
             <img className='enemy-pokemon-img' src={enemyPokemonGIF} alt={enemyPokemon.name} />
@@ -168,20 +189,29 @@ function Fight() {
             <>
               <div>
                 <p><img className='heart' src="./src/assets/enemy-heart.png" alt="heart-icon" />HP: {enemyHP}</p>
-                <p><img className='attack' src="./src/assets/attack.png" alt="heart-icon" />Attack: {enemyPokemon.stats[1].base_stat}</p>
+                <p><img className='attack' src="./src/assets/attack.png" alt="attack-icon" />Attack: {enemyPokemon.stats[1].base_stat}</p>
                 <p><img className='defense' src="./src/assets/defense.png" alt="defense-icon" />Defense: {enemyPokemon.stats[2].base_stat}</p>
               </div>
             </>
           )}
         </div>
       </div>
+  
       <div className='fight-btns'>
-      <button className='attack-btn btn' onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
-      <button className='select-diff-btn btn' onClick={()=> navigate('/select-pokemon', { state: {usersPokemonUrls, userPokemons, randomPokemon}})}>Select different Pokémon</button>
-      <button className='run-btn btn' onClick={()=> navigate('/')}>Run</button>
+        <button className='attack-btn btn' onClick={handleAttack} disabled={isAttackDisabled}>Attack</button>
+        <button className='select-diff-btn btn' onClick={() => navigate('/select-pokemon', { state: { usersPokemonUrls, userPokemons, randomPokemon } })}>Select different Pokémon</button>
+        <button className='run-btn btn' onClick={() => navigate('/')}>Run</button>
       </div>
     </div>
   );
+  
 }
 
 export default Fight;
+
+
+
+
+
+
+
