@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch('https://pokeapi.co/api/v2/location');
+        const response = await fetch('https://pokeapi.co/api/v2/location/');
         const data = await response.json();
         setLocations(data.results);
       } catch (error) {
