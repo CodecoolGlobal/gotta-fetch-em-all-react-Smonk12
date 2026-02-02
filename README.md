@@ -126,6 +126,7 @@ Follow these steps to run the project locally:
     ```bash
     git clone https://github.com/CodecoolGlobal/gotta-fetch-em-all-react-Smonk12.git 
     cd gotta-fetch-em-all-react-Smonk12
+    cd fetch-em-all-files
     ```
 
 2.  **Install dependencies**
@@ -137,7 +138,6 @@ Follow these steps to run the project locally:
 3.  **Start the development server**
 
     ```bash
-    cd my-react-app
     npm run dev
     ```
 
