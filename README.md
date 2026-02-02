@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/CodecoolGlobal/gotta-fetch-em-all-react-Smonk12" alt="Pokemon" border="0">
-    <img src="./my-react-app/src/assets/International_Pokémon_logo.svg.png" alt="Pokemon" border="0" alt="Logo" width="600" height="200">
+    <img src="./fetch-em-all-files/src/assets/International_Pokémon_logo.svg.png" alt="Pokemon" border="0" alt="Logo" width="600" height="200">
   </a>
 
   <h3 align="center">Gotta fetch 'em all!</h3>
